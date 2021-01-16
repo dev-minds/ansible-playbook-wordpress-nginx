@@ -1,16 +1,21 @@
 ---
 # tasks file for nginx
 
-- name: Update apt cache
-  apt: update_cache=yes cache_valid_time=3600
+- name: Update cache 
+  yum: update_cache=yes
   become: yes
 
-- name: Install nginx
-  apt: name={{ item }} state=present
-  become: yes
-  with_items:
+- name: install updates
+  yum: name=* state=latest
+
+- name: Install nginx 
+  yum: name={{ item }} state=present
+  become: yes 
+  with_items: 
+    - epel-release
     - nginx
-    - git
+    - git 
+    - vim 
 
 - name: Start nginx
   become: yes
@@ -19,17 +24,17 @@
     state: started
 
 - name: Update nginx confs for WordPress + PHP
-  template: "src=../templates/default-site.conf dest=/etc/nginx/sites-available/{{server_hostname}} owner=www-data group=www-data mode=0644"
+  template: "src=../templates/default-site.conf dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx mode=0644"
   become: yes
 
 - name: Enable site
-  file: src=/etc/nginx/sites-available/{{server_hostname}} dest=/etc/nginx/sites-enabled/{{server_hostname}} owner=www-data group=www-data state=link
+  file: src=/etc/nginx/conf.d/{{server_hostname}} dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx state=link
   notify:
     - restart nginx
   become: yes
 
-- name: Remove default site
-  file: path=/etc/nginx/sites-enabled/default state=absent
-  notify:
-    - restart nginx
-  become: yes
+# - name: Remove default site
+#   file: path=/etc/nginx/sites-enabled/default state=absent
+#   notify:
+#     - restart nginx
+#   become: yes

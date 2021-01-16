@@ -1,2 +1,2 @@
-sudo apt-get update
-sudo apt-get install ansible -y
+sudo yum update -y 
+sudo yum install ansible -y 

@@ -24,8 +24,8 @@
   unarchive:
     src: /tmp/wordpress-{{ wp_version }}.tar.gz
     dest: /tmp
-    owner: www-data
-    group: www-data
+    owner: nginx
+    group: nginx
     copy: no
   become: yes
   when: not check_path.stat.exists
