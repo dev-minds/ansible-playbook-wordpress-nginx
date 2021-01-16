@@ -5,17 +5,12 @@
   yum: update_cache=yes
   become: yes
 
-- name: install updates
-  yum: name=* state=latest
-
 - name: Install nginx 
-  yum: name={{ item }} state=present
-  become: yes 
-  with_items: 
-    - epel-release
-    - nginx
-    - git 
-    - vim 
+  yum: 
+    name: 
+      - nginx
+      - vim
+    state: present
 
 - name: Start nginx
   become: yes
@@ -23,15 +18,15 @@
     name: nginx
     state: started
 
-- name: Update nginx confs for WordPress + PHP
-  template: "src=../templates/default-site.conf dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx mode=0644"
-  become: yes
+# - name: Update nginx confs for WordPress + PHP
+#   template: "src=../templates/default-site.conf dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx mode=0644"
+#   become: yes
 
-- name: Enable site
-  file: src=/etc/nginx/conf.d/{{server_hostname}} dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx state=link
-  notify:
-    - restart nginx
-  become: yes
+# - name: Enable site
+#   file: src=/etc/nginx/conf.d/{{server_hostname}} dest=/etc/nginx/conf.d/{{server_hostname}} owner=nginx group=nginx state=link
+#   notify:
+#     - restart nginx
+#   become: yes
 
 # - name: Remove default site
 #   file: path=/etc/nginx/sites-enabled/default state=absent
