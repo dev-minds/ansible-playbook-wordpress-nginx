@@ -2,6 +2,6 @@
 
   roles:
     - nginx
-    - wordpress
-    - php
-    - postfix
+    # - wordpress
+    # - php
+    # - postfix
