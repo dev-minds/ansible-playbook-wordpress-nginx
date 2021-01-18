@@ -45,7 +45,7 @@
 - name: Add wp-config
   template: 
     src: wp-config.php 
-    dest: /var/www/html/wp-config.php"
+    dest: /var/www/html/wp-config.php
     owner: apache
     group: apache
     become: yes
