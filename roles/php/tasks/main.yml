@@ -18,7 +18,7 @@
   yum: 
     name: 
     - "{{ remi_release_url }}"
-    # - "{{ epel_release_url }}"
+    - "{{ epel_release_url }}"
   become: true 
 
 - name: Install yum utils 
@@ -46,7 +46,7 @@
      - php-mbstring
      - php-xml
      - php-gd
-     enablerepo: "remi-{{ php_version }}"
+     enablerepo: "remi-{{ php_version }},epel"
   become: true
 
 # - name: Setup php-fpm
