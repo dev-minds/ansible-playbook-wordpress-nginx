@@ -1,7 +1,9 @@
 ---
-service: 
-  name: httpd 
-  state: started 
-  enabled: true 
+- name: Restart apache
+  service: 
+    name: httpd 
+    state: started 
+    enabled: true
+  become: yes  
 
   
