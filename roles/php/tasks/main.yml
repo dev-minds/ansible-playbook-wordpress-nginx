@@ -4,7 +4,21 @@
 - name: Enable remi repo for PHP 7.2.
   set_fact: php_enablerepo="remi,remi-php72"
   when: php_version == "7.2"
-  
+
+- name: Install yum utils 
+  yum: 
+    name: yum-utils 
+    state: present 
+  become: yes 
+
+- name: Disable installation of php 54 
+  shell: yum-config-manager --disable remi-php54
+  become: yes 
+
+- name: Disable installation of php 54 
+  shell: yum-config-manager --enable remi-php73
+  become: yes 
+
 - name: Install php extensions
   yum:
     name: "{{ item }}"
@@ -17,14 +31,14 @@
     - php-ssh2
     - php7.0-mcrypt
 
-- name: Setup php-fpm
-  replace: dest=/etc/php/7.0/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"
-  notify:
-    - restart nginx
-  become: yes
+# - name: Setup php-fpm
+#   replace: dest=/etc/php/7.0/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"
+#   notify:
+#     - restart nginx
+#   become: yes
 
-- name: Add php settings
-  template: src=../../nginx/templates/nginx-wp-common.conf dest=/etc/nginx/nginx-wp-common.conf owner=www-data group=www-data mode=0644
-  notify:
-    - restart nginx
-  become: yes
+# - name: Add php settings
+#   template: src=../../nginx/templates/nginx-wp-common.conf dest=/etc/nginx/nginx-wp-common.conf owner=www-data group=www-data mode=0644
+#   notify:
+#     - restart nginx
+#   become: yes
