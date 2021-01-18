@@ -1,0 +1,21 @@
+---
+- name: Install apache 
+  yum: 
+    name: 
+      - httpd
+      - httpd-devel
+    state: present 
+
+- name: Copy configuration file 
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item. dest }}"
+    owner: root 
+    group: root 
+    mode: 0644
+  with_items: 
+    # - src: httpd.conf 
+    #   dest: /etc/httpd/conf/httpd.conf 
+    - src: ../templates/wordpress.conf 
+      dest: /etc/httpd/conf.d/wordpress.conf 
+
