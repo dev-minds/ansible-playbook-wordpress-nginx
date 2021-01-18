@@ -32,7 +32,7 @@
 
 - name: Move WordPress install files
   synchronize: 
-    src: /tmp/wordpress 
+    src: /tmp/wordpress/* 
     dest: /var/www/html
   become: yes
   # when: not check_path.stat.exists
