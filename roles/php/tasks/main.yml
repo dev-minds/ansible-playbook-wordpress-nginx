@@ -24,9 +24,9 @@
   shell: yum-config-manager --disable remi-php54
   become: yes 
 
-- name: Enable installation of php73
-  shell: yum-config-manager --enable remi-php73
-  become: yes 
+# - name: Enable installation of php73
+#   shell: yum-config-manager --enable remi-php73
+#   become: yes 
 
 - name: Install php extensions
   yum:
