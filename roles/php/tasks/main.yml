@@ -46,7 +46,7 @@
      - php-mbstring
      - php-xml
      - php-gd
-     enablerepo: "remi-{{ php_version }},epel"
+     enablerepo: "remi-{{ php_version }}"
   become: true
 
 # - name: Setup php-fpm
