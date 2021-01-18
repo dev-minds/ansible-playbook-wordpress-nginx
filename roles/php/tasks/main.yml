@@ -1,9 +1,18 @@
 ---
 # tasks file for php
 
-- name: Enable remi repo for PHP 7.3.
-  set_fact: php_enablerepo="remi,remi-php73"
-  when: php_version == "7.3"
+# - name: Enable remi repo for PHP 7.3.
+#   set_fact: php_enablerepo="remi,remi-php73"
+#   when: php_version == "7.3"
+
+- name: Add remi-php71
+  yum_repository:
+    name: remi-php73
+    description: Remi's PHP 7.1 RPM repository for Enterprise Linux $releasever - $basearch
+    mirrorlist: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    enabled: yes
+    gpgcheck: 1
+    gpgkey: http://rpms.remirepo.net/RPM-GPG-KEY-remi
 
 - name: Install yum utils 
   yum: 
@@ -25,11 +34,11 @@
     state: present
   become: yes
   with_items:
-    - php7.3
-    - php7.3-mysql
-    - php7.3-gd
+    - php7
+    - php7-mysql
+    - php7-gd
     - php-ssh2
-    - php7.3-mcrypt
+    - php7-mcrypt
 
 # - name: Setup php-fpm
 #   replace: dest=/etc/php/7.0/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"
