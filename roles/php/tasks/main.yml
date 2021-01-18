@@ -47,6 +47,8 @@
      - php-xml
      - php-gd
      enablerepo: "remi-{{ php_version }},epel"
+     notify: 
+        - restart apache 
   become: true
 
 # - name: Setup php-fpm
