@@ -14,6 +14,13 @@
     gpgcheck: 1
     gpgkey: http://rpms.remirepo.net/RPM-GPG-KEY-remi
 
+- name: install remi and epel repo from remote 
+  yum: 
+    name: 
+    - "{{ remi_release_url }}"
+    - "{{ epel_release_url }}"
+  become: true 
+
 - name: Install yum utils 
   yum: 
     name: yum-utils 
@@ -28,17 +35,19 @@
 #   shell: yum-config-manager --enable remi-php73
 #   become: yes 
 
-- name: Install php extensions
+- name: install php7 packages 
   yum:
-    name: "{{ item }}"
-    state: present
-  become: yes
-  with_items:
-    - php
-    - php-mysql
-    - php-gd
-    - php-ssh2
-    - php-mcrypt
+     name:
+     - php
+    #  - nginx
+     - php-fpm
+     - php-mysql
+     - php-pdo
+     - php-mbstring
+     - php-xml
+     - php-gd
+     enablerepo: "remi-{{ php_version }},epel"
+  become: true
 
 # - name: Setup php-fpm
 #   replace: dest=/etc/php/7.0/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"

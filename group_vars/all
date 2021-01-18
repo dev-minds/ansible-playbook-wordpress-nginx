@@ -20,3 +20,7 @@ wp_sha1sum: db8b75bfc9de27490434b365c12fd805ca6784ce
 #false = Development, minor, and major updates are all disabled
 #minor = Minor updates are enabled, development, and major updates are disabled
 core_update_level: true
+
+remi_release_url: "http://rpms.remirepo.net/enterprise/remi-release-6.rpm"
+epel_release_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm"
+remi_key_url: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
