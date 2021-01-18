@@ -31,7 +31,9 @@
   # when: not check_path.stat.exists
 
 - name: Move WordPress install files
-  command: mv /tmp/wordpress /var/www/html
+  synchronize: 
+    src: /tmp/wordpress 
+    dest: /var/www/html
   become: yes
   # when: not check_path.stat.exists
 
