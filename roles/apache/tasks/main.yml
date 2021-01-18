@@ -19,3 +19,6 @@
     - src: ../templates/wordpress.conf 
       dest: /etc/httpd/conf.d/wordpress.conf 
 
+- name: Start httpd service 
+  shell: systemctl start httpd 
+
