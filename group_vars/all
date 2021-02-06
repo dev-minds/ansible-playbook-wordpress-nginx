@@ -13,7 +13,7 @@ server_hostname: globomantics.com
 
 # WordPress Version
 wp_version: latest
-wp_sha1sum: db8b75bfc9de27490434b365c12fd805ca6784ce
+wp_sha1sum: 19ec00acb177da27533edf5500f911f9d97c047a
 
 #Define Core Update Level
 #true  = Development, minor, and major updates are all enabled
